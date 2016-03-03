@@ -2,7 +2,6 @@
 
 Basic GraphQL server that translates GraphQL requests from the GitHub API.
 
-Translates GraphQL requests to service API calls.
 
 ## Installation
 ```
@@ -15,10 +14,10 @@ npm start
 ```
 
 ## Executing
-In your browser goto: http://localhost:3000/graphql
+In your browser go to: [http://localhost:3000/graphql](http://localhost:3000/graphql)
 
 ## Example
-In the GraphiQL in-browser IDE, try the following:
+In the [GraphiQL](https://github.com/graphql/graphiql) in-browser IDE, try the following:
 ```
 query {
   user(username: "liormb") {
