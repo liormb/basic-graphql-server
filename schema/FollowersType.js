@@ -6,11 +6,8 @@
 
 'use strict';
 
-import {
-    GraphQLList
-} from 'graphql';
-
 import axios from 'axios';
+import { GraphQLList } from 'graphql';
 import FollowType from './FollowType';
 
 const fetchDataFromUrl = (url) => {
@@ -19,15 +16,12 @@ const fetchDataFromUrl = (url) => {
     return axios.get(formattedUrl).then(res => res.data);
 };
 
-const followsType = (type) => {
+const FollowersType = () => {
     return {
         type: new GraphQLList(FollowType),
-        description: 'GitHub information about following or followers',
-        resolve: data => fetchDataFromUrl(data[`${type}_url`])
+        description: 'GitHub information about a user\'s followers',
+        resolve: data => fetchDataFromUrl(data.followers_url)
     };
 };
 
-export default {
-    followersType: followsType('followers'),
-    followingType: followsType('following')
-};
+export default FollowersType;

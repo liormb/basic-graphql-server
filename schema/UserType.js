@@ -14,22 +14,8 @@ import {
     GraphQLList
 } from 'graphql';
 
-import axios from 'axios';
-import FollowType from './FollowType';
-
-const fetchDataFromUrl = (url) => {
-    const needToFormat = url.indexOf('{') > 0;
-    const formattedUrl = needToFormat ? url.slice(0, url.indexOf('{')) : url;
-    return axios.get(formattedUrl).then(res => res.data);
-};
-
-const followsType = (type) => {
-    return {
-        type: new GraphQLList(FollowType),
-        description: 'GitHub information about following or followers',
-        resolve: data => fetchDataFromUrl(data[`${type}_url`])
-    };
-};
+import FollowersType from './FollowersType';
+import FollowingType from './FollowingType';
 
 const UserType = new GraphQLObjectType({
     name: 'User',
@@ -44,8 +30,8 @@ const UserType = new GraphQLObjectType({
         },
         'created_at' : { type: GraphQLString },
         'updated_at' : { type: GraphQLString },
-        'followers'  : followsType('followers'),
-        'following'  : followsType('following')
+        'followers'  : FollowersType(),
+        'following'  : FollowingType()
     })
 });
 
